@@ -1,0 +1,40 @@
+<script src="/fass/js/jquery-3.2.1.min.js"></script>
+
+<div id="modal" class="modal">
+
+    <!-- Modal content -->
+    <div id="bottomSheet" class="modal-bottomsheet animate-opacity">
+        <div class="modal-header <?=isset($type) && $type == 'error' ? $type : 'OK'?>">
+            <span id="closeSheet" class="close">&times;</span>
+            <h2> <?= isset($title) ? $title : "Default" ?> </h2>
+        </div>
+        <div class="modal-body">
+            <p> <?= isset($message) ? $message : "Default" ?>  </p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('modal');
+
+    window.onLoad = pullSheet();
+
+    function pullSheet(){
+        modal.style.display = "block";
+    }
+
+    $("#closeSheet").click(function(){
+        $("#modal").fadeOut("fast", function(){
+            $("#modal").hide();
+        });
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

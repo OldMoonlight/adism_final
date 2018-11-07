@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div id="searchModal" class="modal">
+
+	<!-- Content -->
+	<div class="modal-content-clear" style="float: right">
+		<span onclick="hideSearchModal()" class="close">&times;</span>
+		<form action="login/index.php" method="post">
+			<input type="text" name="searchbox" placeholder="search" style="width: 100%; max-width: 700px; margin-top: 10%; font-size: 190px"required/>
+			<button type="submit" name="search" style="cursor: pointer" />\1f87a</button>
+		</form>
+	</div>
+</div>
+<script>
+function showSearchModal(){
+	document.getElementById('searchModal').style.display = "block";
+}
+function hideSearchModal(){
+	document.getElementById('searchModal').style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == document.getElementById('searchModal')) {
+        document.getElementById('searchModal').style.display = "none";
+    }
+}</script>
