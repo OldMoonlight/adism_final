@@ -1,0 +1,53 @@
+<?php require_once (__DIR__."/../includes/csrf.class.php");
+if (!isset($_SESSION)){session_start();}
+$csrf = new csrf;
+$csrf_Token = $csrf::makeToken()?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Auth </title>
+	<meta name="description" content="Please sign in"/>
+	
+    <?php require_once (__DIR__."/../templates/header_info.php");?>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body style="background: black">
+
+    <div class="splashbox">
+        <img src="/fass/img/fass_splash_round_large.svg" class="splash absolute-center animate-shrink" style="filter: invert(1)"/>
+        <img src="/fass/img/loading_clock.svg" class="loading absolute-center animate-expand"/>
+    </div>
+
+	<form name="Form" class="signin-form" action="login.php" method="post">
+
+		<label for "login_input_username" style="color: white;"><b>USERNAME</b></label>
+		<input id="login_input_username" type="text" name="user_name" required />
+		<br>
+		<label for "login_input_password" style="color: white;"><b>PASSWORD</b></label>
+		<input id="login_input_password" type="password" name="user_password" required />
+        <br>
+        <input type="text" name="csrf_token" value="<?=$csrf_Token?>" hidden/>
+        <br>
+        <!--<div class="g-recaptcha" data-sitekey="6LdaeCwUAAAAALtcUP_pwIxn-FGnfHxLXQnEu53f"></div>
+        <br>-->
+		<button type="submit" name="login" value="Log in" onClick="validateClient()" style="cursor: pointer" />Sign in</button>
+    </form>
+    <button onClick="showCircular()" hidden>Test loading animation</button>
+    
+<script>
+	function validateClient(){
+        a = document.forms["Form"]["login_input_username"].value;
+        b = document.forms["Form"]["login_input_password"].value;
+        if ( a != null && a != "", b != null && b != ""){
+            showCircular();
+        }
+    }
+
+    function showCircular(){
+        document.getElementsByClassName("splash")[0].style.width = "0px";
+        document.getElementsByClassName("loading")[0].style.width = "100%";
+        document.getElementsByClassName("loading")[0].style.height = "100%";
+    }
+</script>
